@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="create-book">
+        <h2>add book to collection</h2>
+        <form>
+            <div class="item">
+                <label for="book-name">title: </label>
+                <input type="texr" name="book-name">
+            </div>
+            <div class="item">
+                <label for="book-author">author: </label>
+                <input type="text" name="book-author">
+            </div>
+            <div class="item">
+                <label for="read">read: </label>
+                <input type="checkbox" name="read">
+            </div>
+        </form>
+    </div>
+    <div id="app">
+        <h2>Book Collection</h2>
+        <ol>
+            <li v-for="book in books">
+              {{ book.name }}
+              {{ book.author }}
+              {{ book.read }}
+            </li>
+        </ol>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="../src/index.js"></script>
+</body>
+</html>
