@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,32 +8,37 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="create-book">
-        <h2>add book to collection</h2>
-        <form>
-            <div class="item">
-                <label for="book-name">title: </label>
-                <input type="texr" name="book-name">
-            </div>
-            <div class="item">
-                <label for="book-author">author: </label>
-                <input type="text" name="book-author">
-            </div>
-            <div class="item">
-                <label for="read">read: </label>
-                <input type="checkbox" name="read">
+    <h2 class="form-title">Add Book To Collection</h2>
+        <form id="book-form" v-on:submit.prevent>
+            <div id="create-book">
+                <div class="grid-item" ><label for="book-name">title: </label></div>
+                <div class="grid-item"><input id="name" type="text" name="book-name" placeholder="title"></div>
+                <div class="grid-item"><label for="book-author">author: </label></div>
+                <div class="grid-item"><input id="author" type="text" name="book-author" placeholder="author"></div>
+                <div class="grid-item"><label for="read">read: </label></div>
+                <div class="grid-item check"><input type="checkbox" name="read" id="check"></div>
+                <div class="grid-item"><button type="button" onclick="bookCollectionController.createBook(document.getElementById('name').value, 
+                                                                                                          document.getElementById('author').value, 
+                                                                                                          document.getElementById('check').checked)">
+                    Submit</button></div>
             </div>
         </form>
-    </div>
     <div id="app">
         <h2>Book Collection</h2>
-        <ol>
-            <li v-for="book in books">
-              {{ book.name }}
-              {{ book.author }}
-              {{ book.read }}
-            </li>
-        </ol>
+        <div class="title-row">
+            <div class="grid-item name"><p>title</p></div>
+            <div class="grid-item"><p>author</p></div>
+            <div class="grid-item"><p>read status</p></div>
+            <div class="grid-item"><p>status option</p></div>
+            <div class="grid-item"><p>deletion</p></div>
+        </div>
+        <div class="book-list" v-for="book in books">
+            <div class="grid-item name"><p>{{ book.name }}</p></div>
+            <div class="grid-item"><p>{{ book.author }}</p></div>
+            <div class="grid-item"><p>{{ book.read }}</p></div>
+            <div class="grid-item"><button  v-bind:id="book.name" class="change" onclick="bookCollectionController.changeStatus(this.id)"><p>change read status</p></button></div>
+            <div class="grid-item"><button  v-bind:id="book.name" class="delete" onclick="bookCollectionController.destroyItem(this.id)"><p>remove</p></button></div>
+        </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="../src/index.js"></script>
